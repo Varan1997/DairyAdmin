@@ -1,0 +1,238 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-brand-50: #f3f7f1;
+  --color-brand-100: #e3ecdd;
+  --color-brand-200: #c7dab9;
+  --color-brand-300: #a2c088;
+  --color-brand-400: #7ba25d;
+  --color-brand-500: #5c8740;
+  --color-brand-600: #456b2e;
+  --color-brand-700: #365525;
+  --color-brand-800: #2c451f;
+  --color-brand-900: #24391b;
+
+  --color-gold-50: #fdf8ec;
+  --color-gold-100: #faedc9;
+  --color-gold-200: #f4d98d;
+  --color-gold-300: #edc158;
+  --color-gold-400: #e2a530;
+  --color-gold-500: #cc8a1f;
+  --color-gold-600: #a86e17;
+  --color-gold-700: #855417;
+
+  --color-cream-50: #fbfaf7;
+  --color-cream-100: #f5f2ea;
+  --color-cream-200: #ece6d8;
+
+  /* Semantic surface tokens — light values by default, flipped inside .dark below.
+     Everything else (cards, tables, nav, text) reads these instead of raw brand/cream
+     shades so the whole app follows one switch. */
+  --color-canvas: #f6f4ee;
+  --color-surface: #ffffff;
+  --color-surface-2: #f5f2ea;
+  --color-surface-hover: #ece6d8;
+  --color-line: rgba(36, 57, 27, 0.09);
+  --color-line-strong: rgba(36, 57, 27, 0.14);
+  --color-ink: #1c2717;
+  --color-ink-muted: rgba(28, 39, 23, 0.62);
+  --color-ink-faint: rgba(28, 39, 23, 0.42);
+
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+
+  --shadow-soft: 0 1px 2px rgba(36, 57, 27, 0.05), 0 8px 24px -12px rgba(36, 57, 27, 0.18);
+  --shadow-soft-lg: 0 4px 8px rgba(36, 57, 27, 0.05), 0 20px 48px -16px rgba(36, 57, 27, 0.28);
+  --shadow-glow: 0 0 0 1px rgba(92, 135, 64, 0.12), 0 12px 28px -10px rgba(92, 135, 64, 0.35);
+}
+
+:root {
+  color-scheme: light;
+}
+
+:root[data-theme="dark"],
+.dark {
+  color-scheme: dark;
+
+  --color-canvas: #0a1210;
+  --color-surface: #121b16;
+  --color-surface-2: #182420;
+  --color-surface-hover: #21322a;
+  --color-line: rgba(255, 255, 255, 0.08);
+  --color-line-strong: rgba(255, 255, 255, 0.14);
+  --color-ink: #eef3ea;
+  --color-ink-muted: rgba(238, 243, 234, 0.64);
+  --color-ink-faint: rgba(238, 243, 234, 0.4);
+
+  --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.35), 0 8px 24px -12px rgba(0, 0, 0, 0.55);
+  --shadow-soft-lg: 0 8px 16px rgba(0, 0, 0, 0.4), 0 28px 56px -20px rgba(0, 0, 0, 0.65);
+  --shadow-glow: 0 0 0 1px rgba(123, 162, 93, 0.18), 0 0 32px -4px rgba(123, 162, 93, 0.35);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+
+    --color-canvas: #0a1210;
+    --color-surface: #121b16;
+    --color-surface-2: #182420;
+    --color-surface-hover: #21322a;
+    --color-line: rgba(255, 255, 255, 0.08);
+    --color-line-strong: rgba(255, 255, 255, 0.14);
+    --color-ink: #eef3ea;
+    --color-ink-muted: rgba(238, 243, 234, 0.64);
+    --color-ink-faint: rgba(238, 243, 234, 0.4);
+
+    --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.35), 0 8px 24px -12px rgba(0, 0, 0, 0.55);
+    --shadow-soft-lg: 0 8px 16px rgba(0, 0, 0, 0.4), 0 28px 56px -20px rgba(0, 0, 0, 0.65);
+    --shadow-glow: 0 0 0 1px rgba(123, 162, 93, 0.18), 0 0 32px -4px rgba(123, 162, 93, 0.35);
+  }
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  background-color: var(--color-canvas);
+  background-image: radial-gradient(circle at 12% 0%, rgba(92, 135, 64, 0.06), transparent 45%),
+    radial-gradient(circle at 100% 0%, rgba(204, 138, 31, 0.05), transparent 40%);
+  background-attachment: fixed;
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+::selection {
+  background-color: var(--color-brand-300);
+  color: #142010;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-line-strong);
+  border-radius: 999px;
+}
+
+.shadow-soft {
+  box-shadow: var(--shadow-soft);
+}
+
+.shadow-soft-lg {
+  box-shadow: var(--shadow-soft-lg);
+}
+
+.shadow-glow {
+  box-shadow: var(--shadow-glow);
+}
+
+.card {
+  background-color: var(--color-surface);
+  border-radius: 1rem;
+  border: 1px solid var(--color-line);
+  box-shadow: var(--shadow-soft);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  padding: 0.6rem 1.1rem;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-primary {
+  background-image: linear-gradient(135deg, var(--color-brand-500), var(--color-brand-700));
+  color: #fff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15), 0 8px 20px -8px rgba(69, 107, 46, 0.55);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-image: linear-gradient(135deg, var(--color-brand-600), var(--color-brand-800));
+}
+
+.btn-secondary {
+  background-color: var(--color-surface-2);
+  color: var(--color-ink);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background-color: var(--color-surface-hover);
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: var(--color-brand-600);
+  border: 1.5px solid var(--color-line-strong);
+}
+
+.dark .btn-outline {
+  color: var(--color-brand-400);
+}
+
+.btn-outline:hover:not(:disabled) {
+  background-color: var(--color-surface-2);
+  border-color: var(--color-brand-500);
+}
+
+.input {
+  width: 100%;
+  border-radius: 0.7rem;
+  border: 1.5px solid var(--color-line-strong);
+  background-color: var(--color-surface);
+  color: var(--color-ink);
+  padding: 0.6rem 0.85rem;
+  font-size: 0.875rem;
+  transition: all 0.15s ease;
+}
+
+.input::placeholder {
+  color: var(--color-ink-faint);
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--color-brand-500);
+  box-shadow: 0 0 0 3px rgba(92, 135, 64, 0.15);
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateX(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.toast-in {
+  animation: toast-in 0.25s ease-out;
+}
